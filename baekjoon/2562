@@ -1,0 +1,36 @@
+#include<iostream>
+
+using namespace std;
+int main()
+{
+	
+	int arr[9];
+	int cnt = 0;
+
+	int max = 0;
+	int index;
+
+	for (int i = 0; i < 9; i++)
+	{
+		cin >> arr[i];
+	}
+
+	for (int i = 0; i < 9; i++)
+	{
+		if (arr[i] > max)
+		{
+			max = arr[i];
+		}
+	}
+
+	for (int i = 0; i < 9; i++)
+	{
+		if (arr[i] == max)
+		{
+			index = i;
+		}
+	}
+
+	cout << max << endl << index+1 << endl;
+	return 0;
+}
