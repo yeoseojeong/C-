@@ -1,0 +1,27 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int str[9][9];
+	int max = -1;
+	int row, col;
+
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			cin >> str[i][j];
+			if (max < str[i][j])
+			{
+				max = str[i][j];
+				row = i;
+				col = j;
+			}
+		}
+	}
+
+	cout << max << "\n" << row+1 <<" " << col + 1<<"\n";
+	return 0;
+}
