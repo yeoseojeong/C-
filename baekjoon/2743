@@ -1,0 +1,21 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	int len = 0;
+	string s;
+
+	cin >> s ;
+
+	while (s[len] != NULL)
+	{
+		len++;
+	}
+
+	cout << len << endl;
+
+	return 0;
+}
