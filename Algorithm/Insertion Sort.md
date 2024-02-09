@@ -13,8 +13,56 @@
 4. 정렬되지 않은 부분의 다음 요소를 선택하여 위의 과정을 반복
 5. 모든 요소가 정렬될 때까지 위의 과정을 반복
 
-----
+---
+```C++
+#include <iostream>
+#include <vector>
+using namespace std;
 
+// 삽입 정렬 함수
+void insertionSort(vector<int>& arr) 
+{
+    int n = arr.size();
+    for (int i = 1; i < n; ++i) 
+    {
+        int key = arr[i];
+        int j = i - 1;
+        // key를 정렬된 부분에 삽입할 적절한 위치 찾기
+        while (j >= 0 && arr[j] > key)
+        {
+            arr[j + 1] = arr[j];
+            --j;
+        }
+        arr[j + 1] = key; // key를 삽입
+    }
+}
+
+int main()
+{
+    vector<int> arr = { 1, 4, 2, 3, 5, 6 };
+
+    cout << "Original array: ";
+    for (int num : arr)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    insertionSort(arr);
+
+    cout << "Sorted array: ";
+    for (int num : arr) 
+    {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+```
+
+---
 ### 시간 복잡도
 - 최선의 경우: O(N) - 이미 정렬된 배열에서 최적의 성능
 - 평균, 최악의 경우: O(N^2) - 배열이 역순으로 정렬되어 있는 경우에 최악의 성능
