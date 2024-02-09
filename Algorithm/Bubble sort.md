@@ -21,19 +21,21 @@ using namespace std;
 
 void bubbleSort(int arr[], int n)
 {
-    for (int i = 0; i < n - 1; ++i)
-     {
-        for (int j = 0; j < n - i - 1; ++j)
-          {
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
             if (arr[j] > arr[j + 1])
-              {
+            {
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
-              }
-          }
+            }
+        }
+        
         cout << "Step " << i + 1 << ": ";
-        for (int k = 0; k < n; ++k)
+        
+        for (int k = 0; k < n; k++)
         {
             cout << arr[k] << " ";
         }
@@ -42,10 +44,13 @@ void bubbleSort(int arr[], int n)
 }
 
 int main() {
-    int arr[] = {64, 25, 12, 22, 11};
+    int arr[] = { 5, 1, 4, 6, 3, 2 };
+
     int n = sizeof(arr) / sizeof(arr[0]);
     cout << "Original array: ";
-    for (int i = 0; i < n; ++i) {
+    
+    for (int i = 0; i < n; i++)
+    {
         cout << arr[i] << " ";
     }
     cout << endl;
@@ -53,7 +58,9 @@ int main() {
     bubbleSort(arr, n);
 
     cout << "Sorted array: ";
-    for (int i = 0; i < n; ++i) {
+   
+    for (int i = 0; i < n; i++)
+    {
         cout << arr[i] << " ";
     }
     cout << endl;
@@ -62,13 +69,15 @@ int main() {
 }
 
 
+
  단계별 결과
-Original array: 64 25 12 22 11 
-Step 1: 25 12 22 11 64 
-Step 2: 12 22 11 25 64 
-Step 3: 12 11 22 25 64 
-Step 4: 11 12 22 25 64 
-Sorted array: 11 12 22 25 64
+Original array: 5 1 4 6 3 2
+Step 1: 1 4 5 3 2 6
+Step 2: 1 4 3 2 5 6
+Step 3: 1 3 2 4 5 6
+Step 4: 1 2 3 4 5 6
+Step 5: 1 2 3 4 5 6
+Sorted array: 1 2 3 4 5 6
 
 ```
 
