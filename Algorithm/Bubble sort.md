@@ -1,4 +1,4 @@
-# Bubble sort
+# 거품 정렬(Bubble sort)
 
 
 
