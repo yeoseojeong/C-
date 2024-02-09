@@ -17,6 +17,12 @@
 
 ---
 
+### GIF로 이해하는 퀵 정렬
+
+![quick-sort-001](https://github.com/yeoseojeong/cpp-study/assets/121150215/c2d81981-264a-40f4-8495-d96a211790b0)
+
+---
+
 ```C++
 
 #include <iostream>
