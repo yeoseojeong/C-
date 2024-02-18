@@ -4,6 +4,7 @@ BFS(너비 우선 탐색)와 DFS(깊이 우선 탐색)는 그래프 탐색 알�
 
 그래프의 모든 노드를 방문하는 방법
 
+---
 
 ### 너비 우선 탐색 (BFS)
 
@@ -18,6 +19,63 @@ BFS(너비 우선 탐색)와 DFS(깊이 우선 탐색)는 그래프 탐색 알�
 - 최단 경로를 찾는 데에 유용
 - 큐를 사용하므로 반복문을 통해 탐색을 수행
 
+----
+
+
+```C++
+
+#include <iostream>
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+void bfs(vector<vector<int>>& graph, int start) {
+    int n = graph.size();
+    vector<bool> visited(n, false);
+    queue<int> q;
+
+    visited[start] = true;
+    q.push(start);
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        cout << node << " ";
+
+        for (int i = 0; i < graph[node].size(); ++i) {
+            int neighbor = graph[node][i];
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 7; // 그래프의 정점 수
+    vector<vector<int>> graph(n);
+
+    // 그래프 초기화
+    graph[0] = {1, 2};
+    graph[1] = {0, 3, 4};
+    graph[2] = {0, 5, 6};
+    graph[3] = {1};
+    graph[4] = {1};
+    graph[5] = {2};
+    graph[6] = {2};
+
+    cout << "BFS traversal starting from node 0: ";
+    bfs(graph, 0);
+
+    return 0;
+}
+
+```
+
+---
+
 ### 깊이 우선 탐색 (DFS)
 
 #### 작동 방식:
@@ -28,6 +86,66 @@ BFS(너비 우선 탐색)와 DFS(깊이 우선 탐색)는 그래프 탐색 알�
 - 한 경로를 완전히 탐색한 후 다음 경로로 넘어감
 - 스택을 사용하거나 재귀 호출을 통해 구현할 수 있음
 - 깊이 우선 탐색은 더 깊은 단계로 진행하므로 더 많은 메모리를 사용할 수 있음
+
+---
+
+```C++
+
+
+#include <iostream>
+#include <stack>
+#include <vector>
+
+using namespace std;
+
+void dfs(vector<vector<int>>& graph, int start) {
+    int n = graph.size();
+    vector<bool> visited(n, false);
+    stack<int> s;
+
+    s.push(start);
+
+    while (!s.empty()) {
+        int node = s.top();
+        s.pop();
+
+        if (!visited[node]) {
+            cout << node << " ";
+            visited[node] = true;
+
+            for (int i = graph[node].size() - 1; i >= 0; --i) {
+                int neighbor = graph[node][i];
+                if (!visited[neighbor]) {
+                    s.push(neighbor);
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 7; // 그래프의 정점 수
+    vector<vector<int>> graph(n);
+
+    // 그래프 초기화
+    graph[0] = {1, 2};
+    graph[1] = {0, 3, 4};
+    graph[2] = {0, 5, 6};
+    graph[3] = {1};
+    graph[4] = {1};
+    graph[5] = {2};
+    graph[6] = {2};
+
+    cout << "DFS traversal starting from node 0: ";
+    dfs(graph, 0);
+
+    return 0;
+}
+
+
+```
+
+---
 
 ### 비교
 
