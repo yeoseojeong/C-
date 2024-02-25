@@ -70,3 +70,11 @@
 1. 전위 순회(Pre Order) : 루트 -> 왼쪽 -> 오른쪽
 2. 중위 순회(In Order) : 왼쪽 -> 루트 -> 오른쪽
 3. 후위 순회(Post Order) : 왼쪽 -> 오른쪽 -> 루트
+
+---
+
+### 참조
+
+정리가 너무 잘되어있어 이 부분은 참조하였습니다.
+
+https://github.com/WooVictory/Ready-For-Tech-Interview/blob/master/Data%20Structure/%5BData%20Structure%5D%20%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89%20%ED%8A%B8%EB%A6%AC.md
