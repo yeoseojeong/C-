@@ -1,80 +1,193 @@
-## 이진 탐색 트리 BST(Binary Search Tree)
+# 이진 탐색 트리 (Binary Search Tree, BST)
 
-**이진 탐색 트리의 목적은?**
+이진 탐색(binary search) ✚ 연결 리스트(linked list)를 결합한 이진트리
 
--> 이진 탐색 + 연결 리스트
+이진 탐색 트리는 각 노드가 최대 두 개의 자식 노드를 가지는 트리 자료 구조
 
-- 이진 탐색
-  - **탐색에 소요되는 시간 복잡도는 O(logN)**
-  - 하지만 삽입, 삭제가 불가능.
-- 연결 리스트
-  - **삽입, 삭제의 시간 복잡도는 O(1)**
-  -  하지만 탐색하는 시간 복잡도는 O(N)
-- 이 두 가지를 합하여 장점을 모두 얻기 위해 고안된 것이 `이진 탐색 트리`
-- 즉, 효율적인 탐색 능력을 가지고 자료의 삽입, 삭제도 가능하게 만드는 것이다.
-
-![img](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fk074C%2FbtqwZZvI1D3%2FeVUanrpKdIRKnZpkKiQMe0%2Fimg.png)
-
-### [특징]
-
-- 이진 트리의 일종으로 이진 탐색 트리에는 데이터를 저장하는 규칙이 있다.
-
-- 이진 탐색 트리의 노드에 저장된 키는 유일하다.
-  1. 루트 노드의 키가 왼쪽 서브 트리를 구성하는 어떠한 노드의 키보다 크다.
-  2. 루트 노드의 키가 오른쪽 서브 트리를 구성하는 어떠한 노드의 키보다 작다.
-  3. 왼쪽과 오른쪽 서브 트리도 이진 탐색 트리이다.
-- 탐색의 시간 복잡도는 O(logN)이다. 최악의 경우, 편향 트리가 되어 O(N)이 될 수도 있다.
-- 이진 탐색 트리의 순회는 **중위 순회**(in order) 방식이다.(왼쪽 - 루트 - 오른쪽)
-- 중위 순회로 **정렬된 순서**를 읽을 수 있다.
-- 중복된 노드가 없어야 한다.
-
-**중복이 없어야 하는 이유는??**
-
-검색을 목적으로 하는 자료구조인데, 굳이 중복이 많은 경우에 이 트리를 사용해 검색 속도를 느리게 할 필요가 없다. 트리에 삽입하는 것보다 노드에 count를 가지게 하여 처리하는 것이 훨씬 효율적이다.
+![image](https://github.com/yeoseojeong/cpp-study/assets/121150215/af888cf3-0fb4-4a92-85d7-1b869074a323)
 
 
-
-**[BST 핵심 연산]**
-
-- 검색
-- 삽입
-- 삭제
-- 트리 생성
-- 트리 삭제
+## 특징
 
 
+노드의 왼쪽 하위 트리에는 노드의 키보다 작은 키가있는 노드만 포함
 
-**[시간 복잡도]**
+노드의 오른쪽 하위 트리에는 노드의 키보다 큰 키가있는 노드 만 포함
 
-- 균등 트리 : 노드 개수가 N개일 때, O(logN)
-- 편향 트리 : 노드 개수가 N개일 때, O(N)
+왼쪽 및 오른쪽 하위 트리도 각각 이진 검색 트리여야함
 
-> 삽입, 검색, 삭제 시간 복잡도는 트리의 Depth에 비례.
+중복된 키를 허용하지 않음
 
+### 기본 연산
 
-
-삭제의 3가지 case
-
-1. 자식이 없는 단말 노드일 때 -> 그냥 삭제
-2. 자식이 1개인 노드일 때 -> 지워진 노드에 자식을 올리기
-3. 자식이 2개인 노드일 때 -> 오른쪽 자식 노드에서 가장 작은 값 or 왼쪽 자식 노드에서 가장 큰 값 올리기 
+#### 검색 (Search)
+이진 탐색 트리에서 특정 요소의 위치를 찾음
 
 
+1. 루트에서 시작
+2. 검색 값을 루트와 비교하여 루트보다 작으면 왼쪽에 대해 재귀하고 크다면 오른쪽으로 재귀
+3. 일치하는 값을 찾을 때까지 절차를 반복
+4. 검색 값이 없으면 null을 반환
 
-편향된 트리(정렬된 상태 값을 트리로 만들면 한쪽으로 뻗음)는 시간 복잡도가 O(N) 이므로 트리를 사용할 이유가 사라진다. 이를 바로 잡도록 도와주고 개선된 트리는 AVL Tree, RedBlack Tree가 있다.
+
+![image](https://github.com/yeoseojeong/cpp-study/assets/121150215/1df8dcbd-4824-401b-af40-8c80f1b7604e)
+
+```C
+
+struct node* search (struct node* root, int key)
+{
+// root값이 null이거나 key값과 같다면 종료한다.
+  if (root == NULL || root->data == key)
+    return root;
+
+// key가 root->data 보다 작으면 왼쪽 서브트리로 재귀한다.
+  if (root->data > key)
+    return search(root->left, key)
+
+// key가 root->data 보다 크면 오른쪽 서브트리로 재귀한다. 
+  return search(root->left, key)
+}
+
+```
 
 
+#### 삽입
 
-**[이진 트리의 순회 방법]**
+이진 검색트리에 데이터를 삽입하는 작업 (중복은 형용하지않음)
 
-1. 전위 순회(Pre Order) : 루트 -> 왼쪽 -> 오른쪽
-2. 중위 순회(In Order) : 왼쪽 -> 루트 -> 오른쪽
-3. 후위 순회(Post Order) : 왼쪽 -> 오른쪽 -> 루트
+새 키는 항상 리프 노드에 삽입
 
----
+1.Root에서 시작
+2.삽입 값을 루트와 비교합니다. 루트보다 작으면 왼쪽으로 재귀하고 크다면 오른쪽으로 재귀
+3.리프 노드에 도달한 후 노드보다 크다면 오른쪽에 작다면 왼쪽에 삽입
 
-### 참조
+![image](https://github.com/yeoseojeong/cpp-study/assets/121150215/9153281f-6d43-4da3-9668-0062b93e1c0a)
 
-정리가 너무 잘되어있어 이 부분은 참조하였습니다.
+```C
 
-https://github.com/WooVictory/Ready-For-Tech-Interview/blob/master/Data%20Structure/%5BData%20Structure%5D%20%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89%20%ED%8A%B8%EB%A6%AC.md
+struct node {
+  int data;
+  struct node *left, *right;
+};
+
+// 새로운 BST node 생성
+struct node* newNode (int key) {
+  struct node* temp = (struct *node)malloc(sizeof(struct node));
+  temp->data = key;
+  temp->left = NULL;
+  temp->right = NULL;
+  return temp;
+}
+
+struct node* insert(struct node *root, int key) {
+  // 트리가 비어있다면 새로운 노드를 만든다.
+  if (root == NULL)
+    return newNode(key);
+
+  // 루트값보다 크면 오른쪽으로 재귀하고, 작다면 왼쪽으로 재귀한다.
+  if (key > root->data)
+    root->right = insert(root->right, key);
+  else if (key < root->data)
+    root->left = insert(root->left, key); 
+  // 같은 값을 가지고 있는 경우 삽입을 하지 않는다.(중복 불가)
+  return root;
+}
+
+```
+
+#### 삭제
+
+
+이진 검색 트리에서 특정 노드를 삭제
+
+이진 검색 트리에서 노드를 삭제하는 세 가지 상황이 있음
+
+**1. 삭제할 노드가 리프노드인 경우**
+
+이 경우 노드를 삭제하기만 하면 됨
+
+![image](https://github.com/yeoseojeong/cpp-study/assets/121150215/94809047-40f1-41c7-adc4-1a2722073ef3)
+
+
+**2.삭제할 노드에 자식이 하나만 있는 경우**
+
+노드를 삭제하고 자식 노드를 삭제된 노드의 부모에 직접 연결
+
+![image](https://github.com/yeoseojeong/cpp-study/assets/121150215/6527c7f0-517d-4c69-8bff-6fc4a021d337)
+
+**삭제할 노드에 자식이 둘 있는 경우**
+
+자식이 둘 있는 경우 successor 노드를 찾는 과정이 추가
+
+ 
+
+#### surrcessor 노드란?
+
+right subtree에 최소값
+
+즉, inorder 순회에서 다음 노드를 말함
+
+1. 삭제할 노드를 찾음
+2. 삭제할 노드의 successor 노드를 찾음
+3. 삭제할 노드와 successor 노드의 값을 바꿈
+4. successor 노드를 삭제
+
+
+![image](https://github.com/yeoseojeong/cpp-study/assets/121150215/7271d629-0bc5-4df0-8196-4da8f1d02ef1)
+
+
+```C
+
+struct node {
+  int data;
+  struct node *left, *right;
+};
+
+// 노드의 최소값을 가져오는 함수
+struct node* minValueNode (struct node* node){
+  struct node* current = node;
+  
+  while(current && current->left != NULL)
+    current = current->left;
+
+  return current;
+}
+
+struct node* deleteNode (struct node* root, int key) {
+// base case  
+  if(root == NULL)
+    return root;
+// 삭제할 노드를 찾는다.    
+  if (key < root->data)
+    root->left = deleteNode(root->left,key);
+
+  else if (key > root->data)
+    root->right = deleteNode(root->right, key);
+
+// 삭제할 노드를 찾은 경우
+  else {
+    struct node* temp;
+// 노드에 자식이 하나 이거나 없는 경우
+    if (root->left == NULL) {
+      temp = root->right;
+      free(root);
+      return temp;
+    }
+    else if (root->right == NULL) {
+      temp = root->left;
+      free(root);
+      return temp;
+    }
+
+// 노드에 자식이 둘 있는 경우
+// successor 노드를 찾는다.
+    temp = minValueNode(root->right);
+// successor 노드 키와 삭제할 노드 키를 바꾼다.
+    root->key = temp->key;
+// 노드를 삭제한다.
+    root->right = deleteNode(root->right, temp->key);
+  }
+  return root;
+}
+
+```
