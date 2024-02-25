@@ -35,9 +35,11 @@
 
 ### 부모 노드와 자식 노드의 관계
 
-왼쪽 자식 index : (부모 index) * 2
-오른쪽 자식 index : (부모 index) * 2 + 1
-부모 index : (자식 index) / 2
+**왼쪽 자식 index :** (부모 index) * 2
+
+**오른쪽 자식 index :** (부모 index) * 2 + 1
+
+**부모 index :** (자식 index) / 2
 
 
 ![image](https://github.com/yeoseojeong/cpp-study/assets/121150215/47db9c8c-5ee8-4b68-b2c6-9aebfe8f2345)
