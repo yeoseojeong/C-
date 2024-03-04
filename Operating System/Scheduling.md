@@ -6,4 +6,3 @@ https://gamedevlog.tistory.com/78
 '
 
 
-V모델도 상세하게 정리
